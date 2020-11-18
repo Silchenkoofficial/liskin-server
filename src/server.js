@@ -2,7 +2,6 @@ import mongoose from 'mongoose';
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import fs from 'fs';
 
 import PostController from './controllers/PostController';
 const Post = new PostController();
@@ -10,7 +9,6 @@ const Post = new PostController();
 const app = express();
 
 const uri = 'mongodb://silchenko:Kakashka25091999@SG-liskin-39691.servers.mongodirector.com:27017/liskin';
-var certFileBuf = fs.readFileSync('C:/Program Files/MongoDB/Server/4.2/bin/file.crt');
 
 mongoose.connect(uri, {
     sslValidate: false,
