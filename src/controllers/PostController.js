@@ -16,6 +16,7 @@ class PostController {
     create(req, res) {
 
         const data = req.body;
+        console.log(data);
     
         const post = new PostModel({
             "address": [

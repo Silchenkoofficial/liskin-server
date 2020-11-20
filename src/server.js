@@ -4,7 +4,9 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 
 import PostController from './controllers/PostController';
+import CourierController from './controllers/CourierController';
 const Post = new PostController();
+const Courier = new CourierController();
 
 const app = express();
 
