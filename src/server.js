@@ -29,6 +29,12 @@ app.get('/orders/:id', Post.read);
 app.delete('/orders/:id', Post.delete);
 app.put('/orders/:id', Post.update);
 
+app.get('/couriers', Courier.index);
+app.post('/couriers', Courier.create);
+app.get('/couriers/:id', Courier.read);
+app.delete('/couriers/:id', Courier.delete);
+app.put('/couriers/:id', Courier.update);
+
 app.listen(27017, () => {
     console.log('SERVER STARTED!');
 });
