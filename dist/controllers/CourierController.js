@@ -6,24 +6,24 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _Post = require("../models/Post");
+var _Courier = require("../models/Courier");
 
-var _Post2 = _interopRequireDefault(_Post);
+var _Courier2 = _interopRequireDefault(_Courier);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var PostController = function () {
-    function PostController() {
-        _classCallCheck(this, PostController);
+var CourierController = function () {
+    function CourierController() {
+        _classCallCheck(this, CourierController);
     }
 
-    _createClass(PostController, [{
+    _createClass(CourierController, [{
         key: "index",
         value: function index(req, res) {
 
-            _Post2.default.find().then(function (err, posts) {
+            _Courier2.default.find().then(function (err, posts) {
                 if (err) {
                     return res.send(err);
                 }
@@ -36,34 +36,24 @@ var PostController = function () {
         value: function create(req, res) {
 
             var data = req.body;
-            console.log(data);
 
-            var post = new _Post2.default({
-                "address": [{
-                    "text": data.address[0].text,
-                    "timeFrom": data.address[0].timeFrom,
-                    "timeTo": data.address[0].timeTo,
-                    "telephone": data.address[0].telephone
-                }, {
-                    "text": data.address[1].text,
-                    "timeFrom": data.address[1].timeFrom,
-                    "timeTo": data.address[1].timeTo,
-                    "telephone": data.address[1].telephone
-                }],
-                "weight": data.weight,
-                "product": data.product,
-                "price": data.price,
-                "isBooked": data.isBooked
+            var courier = new _Courier2.default({
+                "_id": data._id,
+                "firstName": data.firstName,
+                "lastName": data.lastName,
+                "telephone": data.telephone,
+                "activeOrders": data.activeOrders,
+                "completeOrders": data.completeOrders
             });
 
-            post.save().then(function () {
+            courier.save().then(function () {
                 res.send({ status: 'ok' });
             });
         }
     }, {
         key: "read",
         value: function read(req, res) {
-            _Post2.default.findOne({ _id: req.params.id }).then(function (post) {
+            _Courier2.default.findOne({ _id: req.params.id }).then(function (post) {
                 if (!post) {
                     res.send({ error: "not found" });
                 } else {
@@ -74,7 +64,7 @@ var PostController = function () {
     }, {
         key: "update",
         value: function update(req, res) {
-            _Post2.default.findByIdAndUpdate(req.params.id, {
+            _Courier2.default.findByIdAndUpdate(req.params.id, {
                 $set: req.body
             }, function (err) {
                 if (err) {
@@ -86,7 +76,7 @@ var PostController = function () {
     }, {
         key: "delete",
         value: function _delete(req, res) {
-            _Post2.default.remove({
+            _Courier2.default.remove({
                 _id: req.params.id
             }).then(function (post) {
                 if (post) {
@@ -98,7 +88,7 @@ var PostController = function () {
         }
     }]);
 
-    return PostController;
+    return CourierController;
 }();
 
-exports.default = PostController;
+exports.default = CourierController;

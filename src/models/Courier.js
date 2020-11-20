@@ -9,6 +9,6 @@ const CourierSchema = new Schema({
     "completeOrders": Array
 });
 
-const Courier = mongoose.model('order', CourierSchema);
+const Courier = mongoose.model('courier', CourierSchema);
 
 export default Courier;
